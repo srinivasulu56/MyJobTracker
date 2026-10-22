@@ -1,10 +1,17 @@
 from django.shortcuts import render
 from rest_framework import generics
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated,AllowAny
 from .models import Applications
-from .serializers import ApplicationsSerializer
+from .serializers import ApplicationsSerializer,RegistrationSerializer
 from rest_framework.filters import  SearchFilter
 from django_filters.rest_framework import DjangoFilterBackend
+
+
+
+class RegistrationView(generics.CreateAPIView):
+    serializer_class= RegistrationSerializer
+    permission_classes = [AllowAny]
+
 
 class UserApplicationsList(generics.ListCreateAPIView):
     serializer_class=ApplicationsSerializer
